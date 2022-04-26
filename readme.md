@@ -12,7 +12,7 @@
 * This is the place  where  code is executed one line at a time
 
 
-<img src="/home/guest/Documents/javascript/images/Execution context.webp" alt="not available" width="350" height="300" >
+<img src="https://images.viblo.asia/2c66423f-b9af-4eb0-a7b0-7e348a10e267.png" alt="not available" width="350" height="300" >
 
 ##  #2 Javascript is a synchronous singe-threaded language ##
 * Single-thread --> javascript can execute one command at a time.
