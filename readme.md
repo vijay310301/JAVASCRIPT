@@ -808,29 +808,77 @@ TypeError: Assignment to constant variable.
 ```
 
 # Chapter 7: Operators #
+<br>
+
 ## Arithmetic Operators ##
+<br>
 
 <img src="images/arithematic.png" alt="Sorry" height="250">
 
 ## Assignment Operators ##
+<br>
 
 <img src="images/assignment.png" alt="Sorry" height="200">
 
 
 ## String ##
+<br>
 
 <img src="images/string.png" alt="" height="200">
 
 ## Comparison Opearors ##
+<br>
 
 
-<img src="images/comparison.png" alt="" height="200">
+<img src="images/comparison.png" alt="" height="300">
+<br>
 
 ## Logical Operator  ##
+<br>
 
 <img src="images/logical.png" alt="" height="200">
 
+* Logical AND (&&)
+
+* it performs * operation that means,
+
+   
+   * 0 0 --> 0
+   * 0 1 --> 0
+   * 1 0 --> 0
+   * 1 1 --> 1
+
+* In other words, If both conditiona are true, only Result is true.
+
+* Logical OR (||)
+
+* it performs + operation that means,
+
+         
+   * 0 0 --> 0
+   * 0 1 --> 1
+   * 1 0 --> 1
+   * 1 1 --> 1
+
+* In other words if any one of the condition is true the result is true.
+
+* Logical NOT (!)
+
+     * 0 --> 1
+     * 1 --> 0
+
+ * In other words Just opposite.
+
+
+
+
+
+
+
+<br>
+
 ## Bitwise Opeartor ##
+<br>
 
 
 <img src="images/bitwise.png" alt="" height="200">
