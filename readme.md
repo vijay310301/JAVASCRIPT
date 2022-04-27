@@ -12,7 +12,7 @@
 * This is the place  where  code is executed one line at a time
 
 
-<img src="/home/guest/Documents/javascript/images/Execution context.webp" alt="not available" width="350" height="300" >
+<img src="images/Execution context.webp" alt="not available" width="350" height="300" >
 
 ##  #2 Javascript is a synchronous singe-threaded language ##
 * Single-thread --> javascript can execute one command at a time.
@@ -484,6 +484,386 @@ ReferenceError: rule is not defined
 * var    --> For the most part it is still available but only to support legacy code.
 * let    --> let defines a variable but limits its use to the scope in which it was defined.
 * const  --> const is the same as let but you can’t re-assign it to a new value once defined.
+
+#  Scope Visibility Differences  #
+
+##  No Difference In Global Scope ##
+
+*  When variables are defined in global scope there is no differences between var, let and const in terms of scope visibility.
+
+*  They all propagate into inner block-level, function-level and event callback scopes:
+
+```javascript
+
+// let ,var and const are same in global scope
+
+ var monday=1;
+
+ let tuesday=2;
+
+ const wednesday=3;
+
+ console.log(monday,tuesday,wednesday);    ///using globally
+
+ function week(){
+ 
+     console.log(monday);                //Using inside a function
+     
+ 
+     console.log(tuesday);
+
+     console.log(wednesday);
+ }
+week();
+```
+
+* Output:
+
+```javascript
+guest@stalin:~/Documents/javascript$ node scope.js
+1 2 3
+1
+2
+3
+```
+## Keywords let and const limit variable to the scope in which they were defined: ##
+
+```javascript
+// let , const and var in block scope
+
+if(true){                   
+    var jan=1;                   ///Declaring in block-scope
+    let feb=2;
+    const mar=3;
+     
+    console.log(jan,feb,mar);      
+}
+console.log(jan);           //var will log the value
+                       
+console.log(feb);           //let  will give reference error
+
+console.log(mar);           //const will also give reference error   
+```
+* Output:
+```javascript
+guest@stalin:~/Documents/javascript$ node scope.js
+1 2 3
+1
+/home/guest/Documents/javascript/scope.js:128
+console.log(feb);           //let  will give reference error
+            ^
+
+ReferenceError: feb is not defined
+```
+
+## Variables defined using let and const are not hoisted. Only var is ##
+* Hoisting means that using variables even before initializing it
+### 1.Hoisting var  ###
+ * It will produce default keyword undefined because it onloy allocates placeholder
+ ```javascript
+ //Hoisting var
+
+console.log(jun);
+var jun=55;
+ ```
+
+ * Output:
+ ```javascript
+ guest@stalin:~/Documents/javascript$ node scope.js
+undefined
+ ```
+
+### 2.Hoistig let and const ###
+* It will produce an reference error as let and const will allocate memory in seperate place not in global in execution context.
+```javascript
+//Histing let
+console.log(jul);
+let jul=34;
+
+```
+* Output:
+```javascript
+console.log(jul);
+            ^
+
+ReferenceError: jul is not defined
+```
+* Same reference errpr will be come for const also.
+
+## In Function Scope all variable types, including var remain limited to their scope ##
+* We cannot access variables outside of the function scope in which they were defined regardless of which keyword was used.
+```javascript
+// let, var and const are same in function scope
+
+function games(){
+    var football=1;              //declaring inside functons
+    let cricket=2;
+    const hockey=3;
+
+    console.log(football);        //can work inside a function
+    console.log(cricket);          
+    console.log(hockey);
+}
+games();
+
+console.log(fotball);          //cannot acces it globaly
+```
+* Output:
+```javascript
+guest@stalin:~/Documents/javascript$ node scope.js
+1
+2
+3
+/home/guest/Documents/javascript/scope.js:165
+console.log(fotball);
+```
+* The same referece error will be thrown to the other let and const also.
+
+
+## Closures  ##
+
+* A function closure is a function trapped inside another function:
+
+* Function along with it,s lexical scope forms closure.
+
+```javascript
+ var plus =  function (){
+    var counter=0;
+      return function() {
+        counter +=1;
+        return counter;
+    }
+
+} 
+();
+
+console.log(plus());
+console.log(plus());
+console.log(plus());
+```
+
+* Output:
+
+```javascript
+guest@stalin:~/Documents/javascript$ node closure.js
+1
+2
+3
+```
+## Class scope ##
+
+* The class scope is simply a placeholder. Trying to define variables directly in class scope will produce an error
+
+```javascript
+class cat {
+    let property=1;     //will produce error
+    this.property=2;
+}
+```
+
+* Output:
+```javascript
+guest@stalin:~/Documents/javascript$ node class.js
+/home/guest/Documents/javascript/class.js:2
+    let property=1;
+        ^^^^^^^^
+
+SyntaxError: Unexpected identifier
+
+```
+
+* In class methods, let (or var or const) only create a local variable to that scope.
+* Therefore, it cannot be accessed outside of the method in which it was defined.
+
+```javascript
+class cat{
+    constructor(){
+        let property=1;
+        this.something=2;
+
+    }
+    methods(){
+       
+        console.log(this.property);
+        console.log(this.something);
+    }
+}
+
+const a = new cat();
+
+a.methods();
+```
+
+* Output:
+
+```javascript
+undefined
+2
+```
+## const keyword ##
+
+* The const keyword is distinct from let and var.
+* It requires assignment on definition
+
+```javascript
+const a;   //shows error
+```
+
+* Output:
+```javascript
+/home/guest/Documents/javascript/const.js:4
+const a;   //shows error
+      ^
+
+SyntaxError: Missing initializer in const declaration
+```
+* Reason: value of const cannot be reassigned
+
+```javascript
+const b =10;
+b=12;
+console.log(b);
+```
+* Output:
+```javascript
+b=12;
+ ^
+
+TypeError: Assignment to constant variable.
+```
+
+* CORRECT METHOD:
+```javascript
+const b =10;   // no error
+```
+### const and Arrays ###
+
+* Can’t assign any new objects to the original variable name again.
+
+```javascript
+const c=[];
+c[0]=276;
+c[1]=356;
+c[2]=456;
+console.log(c);
+ c = [];         //  reassigning is not allowed
+```
+* Output:
+```javascript
+[ 276, 356, 456 ]
+/home/guest/Documents/javascript/const.js:16
+ c = [];
+   ^
+
+TypeError: Assignment to constant variable.
+```
+
+### const and Object Literals  ###
+* We can't reassign the object but can acces the properties and methods within it
+
+```javascript
+ const obj ={
+     property : 1 ,
+     display : function (){
+         console.log("hi")
+     }
+   
+ }                              //Normal object with const keyword
+
+ console.log(obj);              //prints available object
+
+ obj.display();                   //Prints display function
+
+ obj.property=3;           
+ console.log(obj);    //We can update the property      
+
+obj.display =  () => {
+    console.log("hello");       //We can update the function
+}
+obj.display();
+
+obj={                          //But we can't reassign ,It will show error
+    property :35,
+    show : function(){
+
+    }
+}
+```
+
+* Output:
+```javascript
+{ property: 1, display: [Function: display] }
+hi
+{ property: 3, display: [Function: display] }
+hello
+/home/guest/Documents/javascript/const.js:40
+obj={                          //But we can't reassign ,It will show error
+   ^
+
+TypeError: Assignment to constant variable.
+```
+
+# Chapter 7: Operators #
+## Arithmetic Operators ##
+
+<img src="images/arithematic.png" alt="Sorry" height="250">
+
+## Assignment Operators ##
+
+<img src="images/assignment.png" alt="Sorry" height="200">
+
+
+## String ##
+
+<img src="images/string.png" alt="" height="200">
+
+## Comparison Opearors ##
+
+
+<img src="images/comparison.png" alt="" height="200">
+
+## Logical Operator  ##
+
+<img src="images/logical.png" alt="" height="200">
+
+## Bitwise Opeartor ##
+
+
+<img src="images/bitwise.png" alt="" height="200">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -75,7 +75,6 @@ console.log(accust_name);   //creates error message
 
 
 
-*/
 
 
 
@@ -93,8 +92,124 @@ console.log(rule);    // Using it globally
 
 
 
+// let ,var and const are same in global scope
 
+ var monday=1;
+
+ let tuesday=2;
+
+ const wednesday=3;
+
+ console.log(monday,tuesday,wednesday);    ///using globally
+
+ function week(){
  
+     console.log(monday);                //Using inside a function
+     
+ 
+     console.log(tuesday);
+
+     console.log(wednesday);
+ }
+week();
+
+
+// let , const and var in block scope
+
+if(true){                   
+    var jan=1;                   ///Declaring in block-scope
+    let feb=2;
+    const mar=3;
+     
+    console.log(jan,feb,mar);      
+}
+console.log(jan);           //var will log the value
+                       
+console.log(feb);           //let  will give reference error
+
+console.log(mar);           //const will also give reference error   
+
+
+
+
+//Hoisting var
+
+console.log(jun);
+var jun=55;
+
+
+//Histing let
+console.log(jul);
+let jul=34;
+
+console.log(aug);
+const aug=100;
+
+
+*/
+
+
+// let, var and const are same in function scope
+
+function games(){
+    var football=1;              //declaring inside functons
+    let cricket=2;
+    const hockey=3;
+
+    console.log(football);        //can work inside a function
+    console.log(cricket);          
+    console.log(hockey);
+}
+games();
+
+console.log(fotball);          //cannot acces it globaly
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
