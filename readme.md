@@ -12,11 +12,10 @@
 * This is the place  where  code is executed one line at a time
 
 
-<<<<<<< HEAD
+
 <img src="images/Execution context.webp" alt="not available" width="350" height="300" >
-=======
-<img src="https://images.viblo.asia/2c66423f-b9af-4eb0-a7b0-7e348a10e267.png" alt="not available" width="350" height="300" >
->>>>>>> 77121902bec2dfbf28b7d23c81262a702b37881d
+
+
 
 ##  #2 Javascript is a synchronous singe-threaded language ##
 * Single-thread --> javascript can execute one command at a time.
@@ -882,6 +881,8 @@ TypeError: Assignment to constant variable.
 
 
 <img src="images/bitwise.png" alt="" height="200">
+
+
 
 
 
