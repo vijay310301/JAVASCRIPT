@@ -14,7 +14,7 @@
 
 
 <img src="images/Execution context.webp" alt="not available" width="350" height="300" >
-
+i
 
 
 ##  #2 Javascript is a synchronous singe-threaded language ##
@@ -881,6 +881,169 @@ TypeError: Assignment to constant variable.
 
 
 <img src="images/bitwise.png" alt="" height="200">
+
+<br>
+
+* Bitwise opeartors converts  the numbers to binary format and performs bitwise operations.
+
+
+* 1- Bitwise AND ( & )
+
+* Example:
+
+ ```javascript
+ //Bitwise AND
+
+let a=3;         //converted  as 0011
+
+let b=5;           //coverted as 0101
+
+console.log(a & b);       // res 0001  --> 1
+ ```
+
+ * Output:
+ ```javascript
+ guest@stalin:~/Documents/javascript$ node operators.js
+1
+ ```
+
+* 2- Bitwise OR ( | )
+
+* Example:
+
+ ```javascript
+ 
+//Bitwise OR
+
+let c=10;              // converted as 1010
+
+let d= 8;              // converted as 1000
+
+console.log(c | d)             // res 1010  --> 10
+```
+
+ * Output:
+
+ ```javascript
+ guest@stalin:~/Documents/javascript$ node operators.js
+
+10
+
+ ```
+
+
+* 3- Bitwise XOR ( ^ )
+
+* Example:
+
+ ```javascript
+ //Bitwise XOR
+
+let e=6;              // converted as 0110
+
+let f= 9;              //converted as 1001
+
+console.log(e ^ f)             // res 1111 -->  15
+ 
+
+```
+
+ * Output:
+
+ ```javascript
+ guest@stalin:~/Documents/javascript$ node operators.js
+
+15
+
+```
+
+* 4- Bitwise NOT ( ~ )
+
+* Explanation:
+
+   * The 32-bit signed integer operand is inverted according to two's complement. That is, the presence of the most significant bit is used to express negative integers.
+
+   * Bitwise NOTing any number x yields -(x + 1). For example, ~-5 yields 4.
+
+   * Note that due to using 32-bit representation for numbers both ~-1 and ~4294967295 (2^32 - 1) results in 0
+    
+
+
+* Example:
+
+ ```javascript
+ //Bitwise NOT
+
+let g=5;              // converted as 00000000000000000000000000000101 (5)
+                      // Since JavaScript uses 32 bits signed integers
+
+
+console.log( ~g)      // res 11111111111111111111111111111010 (~5 = -6) 
+
+```
+
+ * Output:
+
+ ```javascript
+ guest@stalin:~/Documents/javascript$ node operators.js
+
+-6
+
+```
+* 5- Bitwise Left shift ( << )
+ * The << operator is the same as multiplying a whole number by 2
+
+* Example:
+
+ ```javascript
+ //Bitwise Leftshift
+
+let h=5;              // converted as 00000000000000000000000000000101 (5)
+                      // Since JavaScript uses 32 bits signed integers
+
+
+console.log( h << 1)  // 00000000000000000000000000000101  (5)
+                      // 00000000000000000000000000001010  (1 left shift of 5) --> 10
+
+ 
+ ```
+
+ * Output:
+
+ ```javascript
+ guest@stalin:~/Documents/javascript$ node operators.js
+10
+
+```
+* 5- Bitwise Right shift ( >> )
+ * The >> operator is the same as dividing a whole number by 2
+
+* Example:
+
+ ```javascript
+ //Bitwise Rightshift 
+
+let i=5;              // converted as 00000000000000000000000000000101 (5)
+                      // Since JavaScript uses 32 bits signed integers
+
+
+console.log( h >> 1)  // 00000000000000000000000000000101  (5)
+                      // 00000000000000000000000000000010  (1 right shift of 5) --> 2
+
+```
+
+ * Output:
+
+ ```javascript
+ guest@stalin:~/Documents/javascript$ node operators.js
+2
+
+```
+
+
+
+
+
 
 
 
