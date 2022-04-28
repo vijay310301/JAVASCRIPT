@@ -1039,6 +1039,739 @@ console.log( h >> 1)  // 00000000000000000000000000000101  (5)
 2
 
 ```
+<br>
+
+## typeof Opeartor ##
+
+* The typeof operator is used to check the type of a value. 
+
+* It will often evaluate to either primitive type, object or function.
+
+<br>
+
+<img src="images/typeof.png" alt="not available" height="220">
+
+<br>
+
+## Ternary (?:) ##
+
+* The ternary operator has the form of: <b> statement ? statement : statement </b>
+
+* Statements can be expressions or a single value
+
+* NOTE :  It does not support {} brackets or multiple statements.
+
+
+ ```javascript
+
+// ternary
+
+ let z = (1===1) && (0==1) ? console.log("hi") : console.log("hello");
+
+```
+* Output:
+ ```javascript
+
+hello
+
+```
+
+## delete ##
+
+* The delete keyword can be used to delete an object property
+
+```javascript
+//delete
+
+let obj={
+    initial : "S",
+    Name : "Vijay",
+    Age:20
+}
+console.log(obj);     //Before delete
+delete obj.Name;
+console.log(obj);      //After delete
+```
+
+* Output:
+
+```javascript
+{ initial: 'S', Name: 'Vijay', Age: 20 }
+{ initial: 'S', Age: 20 }
+```
+
+* We cannot use delete to remove stand-alone variables.
+
+```javascript
+let variable =29;
+console.log(variable);  //before deleting
+delete variable;
+console.log(variable);   // After delete
+
+```
+* Output:
+
+```javascript
+29
+29     // Not deleted
+```
+
+* In Strict mode error message is thrown
+
+*  Console Output:
+
+ * VM35:3 Uncaught SyntaxError: Delete of an unqualified identifier in strict mode
+
+## in ## 
+
+* The in operator can be used to check if a property name exists in an object
+
+```javascript
+// in
+
+let sorry = {
+    name :"vijay"
+}
+console.log("name" in { name : "vijay"});
+
+```
+
+* Output:
+
+```javascript
+true
+
+```
+* The in operator, when used together with arrays, will check if an index exists.
+
+```javascript
+// in
+
+let array = [ 1 , 2,  "hi" ];
+console.log(0 in [ 1 , 2,  "hi" ] );
+console.log(1 in [ 1 , 2,  "hi" ] );
+console.log(2 in [ 1 , 2,  "hi" ] );
+console.log(3 in [ 1 , 2,  "hi" ] );
+
+```
+* Output:
+
+```javascript
+true
+true
+true
+false
+
+```
+
+* You can check for properties on built-in data types. The length property is nativeto all arrays
+```javascript
+let array = [ 1 , 2,  "hi" ];
+console.log("length" in array);
+```
+```javascript
+true
+
+```
+* The ”length” property does not exist natively on an object unless it’s added ex-plicitly:
+
+```javascript
+let obj2={
+    name: "vijay",
+    age:2
+}
+
+console.log("length" in obj2);
+console.log("length" in {"length" :1});
+
+```
+* Output:
+
+```javascript
+false
+true
+
+```
+
+* Check for presence of constructor or prototype property on an object constructor function
+
+```javascript
+function obj3(){
+    this.name="vijay",
+    this.age=20
+}
+
+const obj4 = new obj3();
+
+console.log(obj4);
+
+console.log("constructor" in obj3 );
+console.log("prototype" in obj3);
+
+```
+
+* Output:
+
+```javascript
+true
+true
+
+```
+
+# Chapter : 9     #
+# ...rest and ...spread # 
+
+## Rest and Spread Properties ##
+
+* The rest syntax is called rest parameters, in the context of using it as a parameter name in a function definition, where it simply means: ”the rest of arguments”.
+
+* Sometimes it is referred to as rest elements, because it assumes multiple values.
+
+* ...rest parameter – collect all remaining parameters (”the rest of”) into an array.
+
+* Example :
+
+* Let us consider a simple sum function
+
+```javascript
+function sum(a,b){
+    return a+b;
+}
+console.log(sum(1,6,));
+```
+* Output:
+```javascript
+7
+```
+
+* The ...rest parameters can gather an unknown number of arguments passed to the function and store them in an array (named args in this example)
+
+```javascript
+function sum(...args){
+    console.log(args);
+}
+sum(1,3,5,6);
+```
+* Output:
+```javascript
+guest@stalin:~/Documents/javascript$ node rest.js
+[ 1, 3, 5, 6 ]
+```
+* ...rest should be used as a last parameter if it is not ,it will show error
+
+```javascript
+function sum(...args,a,b){
+    console.log(args);
+}
+sum(1,3,5,6);
+```
+* Output:
+```javascript
+/home/guest/Documents/javascript/rest.js:23
+function sum(...args,a,b){
+                    ^
+
+SyntaxError: Rest parameter must be last formal parameter
+
+```
+* If we pass array as argument , it will consider as array
+```javascript
+function sum(...args){
+    console.log(args);
+}
+sum([1,3,5]);
+```
+* Console Output:
+```javascript
+[Array(3)]
+0: (3) [1, 3, 5]
+length: 1
+[[Prototype]]: Array(0
+```
+### Overlap of ...spread and ...rest ###
+
+## Ex:1 ##
+```javascript
+function print(a,...args){
+    console.log(a);
+    console.log(args);
+}
+print(...[1,2,3],4,5);
+
+```
+* Output:
+```javascript
+1
+[ 2, 3, 4, 5 ]
+```
+
+* Here, first ...spread forms a complete list of arguments: 1, 2, 3, 4, 5 and that’s what’s passed into the print function. 
+
+* Inside the function, a equals 1, and [2, 3, 4, 5] is ”the rest of” arguments.
+
+
+## Ex:2 ##
+
+```javascript
+function print2(a,b,c, ...args){     //...rest utilize the  remainig
+   console.log(a);
+   console.log(b);
+   console.log(c);
+    console.log(args);
+}
+print2(...[24,56],1,2,3,5,6);    //...spread attaches elements to list 
+
+```
+  * Here ...spread attaches the array [24,56] to the excisting list of aruments.
+  * So the arguments are: [24,56,1,2,3,5,6]
+  * Inside a function we are printing a,b,c and args
+  * a=24,b=56,c=1 and args=remaing of a,b,c so [2,3,5,6]
+
+* Output:
+
+```javascript
+  guest@stalin:~/Documents/javascript$ node rest.js
+24
+56
+1
+[ 2, 3, 5, 6 ]
+```
+
+* NOTE: We can use ...spread anywhere in the list No error will be occur
+
+```javascript
+unction print2(a,b,c, ...args){     //...rest utilize the  remainig
+   console.log(a);
+   console.log(b);
+   console.log(c);
+    console.log(args);
+}
+print2(1,2,...[24,56],3,5,6);    //...spread attaching in middle to list 
+
+```
+* Output:
+
+```javascript
+guest@stalin:~/Documents/javascript$ node rest.js
+1
+2
+24
+[ 56, 3, 5, 6 ]
+```
+## Creating a sum() function with ...rest arguments ##
+```javascript
+
+console.log("----consider her after-----");
+
+function sum(...arguments){
+    let sum=0;
+    for(let arg of arguments)
+    sum += arg;
+    return sum;
+}
+console.log(sum(1,2,5,49));
+```
+* Output:
+```javascript
+57
+```
+
+## Using reduce method ##
+
+```javascript
+//Using reduce method
+
+function sum(...args){
+    return args.reduce((x,v) => x+v,0)
+}
+console.log(sum(1,3,5,7));
+```
+* Output:
+```javascript
+16
+```
+
+## Using Arrow function ##
+
+```javascript
+
+//Using Arrow functions
+let add=(...a) => a.reduce((x,v) => x+v , 0);
+console.log(add(100,200,376));
+```
+* Output:
+```javascript
+676
+```
+
+## Flattening arrays with ...spread ##
+
+```javascript
+//flatering of array
+
+let array1 = ["i","o","u"];         //array
+
+const array2 = ["a","e",...array1];   //adding elements using spread 
+
+console.log(array2);
+```
+* Output:
+```javascript
+[ 'a', 'e', 'i', 'o', 'u' ]
+
+```
+
+* NOTE: We can’t use ...spread syntax to assign values to variables
+```javascript
+let a=...array1;
+console.log(a);
+
+```
+* Output:
+```javascript
+/home/guest/Documents/javascript/restspread.js:84
+let a=...array1;
+      ^^^
+
+SyntaxError: Unexpected token ...
+
+
+```
+
+## Destructuring Assignment ##
+<br>
+
+### #1 Destructuring assignment can be used to extract multiple items from arrays and objects and assign them to variables: ###
+
+```javascript
+//array declarations 
+
+//Normal
+
+let good = [1,3,4];  
+console.log(good);
+
+good[2]=26;
+console.log(good);   //We can acces each elements within array
+
+//Another method
+
+ [a,c,d]=[10,35,67];
+console.log(a,c,d);
+
+c=44;                  //We can access elements seprately
+console.log(c);    
+
+```
+
+* Output:
+
+```javascript
+[ 1, 3, 4 ]
+[ 1, 3, 26 ]
+10 35 67
+44
+```
+### #2 When var, let or const are not specified, var is assumed ###
+
+```javascript
+[arr]=[2];
+console.log(window.arr);
+
+let [brr]=[4];
+console.log(window.brr);
+```
+* Output:
+```javascript
+2
+restspread.js:106 undefined  //let definitions are not available as a property on window object
+```
+### #3 It is possible to destructure into ...rest array ###
+```javascript
+[a,b,...rest] = [1,4,56,83,67,89,23];
+console.log(a,b);
+console.log(a);
+console.log(rest);
+```
+* Output:
+```javascript
+1 4
+1
+[ 56, 83, 67, 89, 23 ]
+
+```
+
+ ### #4 Destructuring is often used to extract object properties to a matching name ###
+ ```javascript
+ let colors ={
+    red:1,
+    blue:2,
+    green:3,
+    mildcolors:{
+        orange:5,
+        brown:2,
+        yellow:6
+
+    }
+
+};
+
+let {blue} = colors;  //Destructuring
+
+console.log(blue);
+
+let {red,green} = colors;  //Extracting multiple values
+console.log(red+green);    //Adding extracted values
+
+
+
+let { orange} = colors;  //We cannot access inner object elements directlt
+console.log(orange);     //it returns undefined as orange is inner object property
+
+
+let {yellow ,brown} = colors.mildcolors;         //We can access inner object element using this method
+console.log(yellow);
+console.log(brown);
+
+
+let {pink} = colors;    //We cannot access unavailable property in object
+console.log(pink);      //It returns undefined as pink is not available in object property
+
+
+let { blue :darkblue} =colors;    //We can rename the property while destructure it
+console.log(darkblue);            //here blue is renames as darkblue and called using new name
+
+
+ ```
+
+
+
+
+ * Output:
+
+ ```javascript
+ 2
+4
+undefined
+6
+2
+undefined
+2
+ ```
+
+### #5 Merging objects with ...spread ###
+
+```javascript
+//Merging objects with ...spread
+
+let husband = {
+    hname:"Ashok",
+    hage:27,
+    hwork : () => {
+        console.log("He is a  lawyer");
+    }
+};                                          //obj 1
+
+let wife= {
+    wname:"Nithya",
+    wage:28,
+    wwork : () => {
+        console.log("she is a hotelmanager");
+    }
+};                                               // obj 2
+let family = {
+    ...husband,
+    ...wife
+    };                                         // merged obj 3  using ...spread
+
+console.log(family);
+```
+* Output:
+
+```javascript
+{ hname: 'Ashok',
+  hage: 27,
+  hwork: [Function: hwork],
+  wname: 'Nithya',
+  wage: 28,
+  wwork: [Function: wwork] }
+```
+### * NOTE: Property names should be different for every object otherwise the second object property will overwrite ###
+
+* In below program same property names are used for all the objects . so second is overwrite the first one
+
+```javascript
+
+let p={
+   name:"ajith"
+};
+let q={
+    name:"surya"
+
+};
+
+let r={
+    ...p,
+    ...q
+
+};
+console.log(r);
+```
+* Output:
+
+```javascript
+{ name: 'surya' }
+
+```
+### #6 Merging nested objects with ...spread ###
+
+```javascript
+let p={
+   name:"ajith",
+   details:{
+       blood_group: "O +ve",
+   }
+};
+let q={
+    age:4,
+
+};
+
+let r={
+    ...p,
+    ...q
+
+};
+console.log(r);
+
+```
+* Output:
+
+```javascript
+{ name: 'ajith', details: { blood_group: 'O +ve' }, age: 4 }
+
+```
+
+### #6 Merging arrays with ...spread ###
+
+```javascript
+let boys=["ashwin",20,"vishva",15];
+let girls=["Nirmala",56,"Oviya",28];
+let team = [...boys,...girls];
+
+console.log(team);
+```
+
+* Output:
+```javascript
+[ 'ashwin', 20, 'vishva', 15, 'Nirmala', 56, 'Oviya', 28 ]
+```
+<br>
+<br>
+
+# Chapter 10 : Closure  #
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

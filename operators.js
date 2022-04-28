@@ -52,15 +52,62 @@ console.log( h >> 1)  // 00000000000000000000000000000101  (5)
                       // 00000000000000000000000000000010  (1 right shift of 5) --> 2
 
 
+// ternary
+
+ let z = (1===1) && (0==1) ? console.log("hi") : console.log("hello");
+
+//delete
+
+let obj={
+    initial : "S",
+    Name : "Vijay",
+    Age:20
+}
 
 
 
+console.log(obj);     //Before delete
+delete obj.Name;
+console.log(obj);      //After delete
+
+"use Strict";
+let variable =29;
+console.log(variable);  //before deleting
+delete variable;
+console.log(variable);   // After delete
+
+// in
+
+let sorry = {
+    name :"vijay"
+}
+console.log("name" in { name : "vijay"});
 
 
+let array = [ 1 , 2,  "hi" ];
+console.log("length" in array);
+console.log(0 in [ 1 , 2,  "hi" ] );
+console.log(1 in [ 1 , 2,  "hi" ] );
+console.log(2 in [ 1 , 2,  "hi" ] );
+console.log(3 in [ 1 , 2,  "hi" ] );
+
+let obj2={
+    name: "vijay",
+    age:2
+}
+
+console.log("length" in obj2);
+console.log("length" in {"length" :1});
 
 
+function obj3(){
+    this.name="vijay",
+    this.age=20
+}
 
+const obj4 = new obj3();
 
+console.log(obj4);
 
-
-
+console.log("constructor" in obj3 );
+console.log("prototype" in obj3);
