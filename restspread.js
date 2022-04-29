@@ -99,11 +99,11 @@ console.log(a,c,d);
 c=44;                  //We can access elements seprately
 console.log(c);    
 
-//[arr]=[2];
-//console.log(window.arr);
+[arr]=[2];
+console.log(window.arr);
 
-//let [brr]=[4];
-//console.log(window.brr);
+let [brr]=[4];
+console.log(window.brr);
 
 
 

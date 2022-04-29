@@ -1671,6 +1671,389 @@ console.log(team);
 
 # Chapter 10 : Closure  #
 
+* A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment). 
+* In other words, a closure gives you access to an outer function's scope from an inner function. 
+* In JavaScript, closures are created every time a function is created, at function creation time.
+* Basically a function inside a function and the inner function can acces the global functions variables.
+## Common syntax for closure functions ##
+
+```javascript
+function global(){
+    console.log("I am global function");
+    function inner(){
+        console.log("I am inner function");
+    } inner();
+}
+global();
+```
+* Output:
+```javascript
+I am global function
+I am inner function
+```
+
+## Example closure function ##
+
+```javascript
+
+function sendEmail(sub,message,from){
+
+  let msg = ` "${sub}" > "${message}" received from ${from}.`;
+
+  let send = function(){
+    
+    console.log(msg);
+  }
+  send();
+
+}
+sendEmail("Re: Subject","Good news","Vijay");
+```
+
+* Output:
+
+```javascript
+ "Re: Subject" > "Good news" received from Vijay.
+
+```
+## Explanation ##
+
+* First of all a function sendEmail is created to print some message using parameters sub,message and from.
+* Another function is created inside the sendEmail function named send().
+* In inner function send(), we only prints the msg statement which was declared in the parent function sendEmail.
+* So we can access the variables of parent function inside the child function because of lexical scoping.
+## Lexical environment ##
+* Lexical means Sequence or heirarchy.
+* Lexical environment is the local memory along with the parent scope.
+
+## Scope ##
+* Scope means where we can  access a specific variable or a function in our code.
+
+
+## Example:2 ##
+
+* Instead of calling send(), let’s return it. This way a reference to this private method can be created in global scope.
+
+```javascript
+
+function india(from ,sub,message){
+
+  let msg = `"${sub}" > "${message}" received from ${from}.`;
+
+    let send = function(){
+
+   console.log(msg);
+
+  }
+   return send;
+  
+}
+//Creating refernce to india
+let ref = india ('tamil','RE : Subject','Good news.');
+
+//calling by refernce name
+ref();
+
+```
+
+* Output:
+
+```javascript
+"RE : Subject" > "Good news." received from tamil.
+```
+
+## Example:3 ##
+```javascript
+let print ,set, increase,decrease;
+function manager(){
+  console.log("manager();");
+  let number = 15;
+  print = function(){
+    console.log(number);
+  }
+  
+  set = function(value){
+      number=value;
+    }
+    increase = function(){
+      number++;
+    }
+    decrease=function(){
+      number--;
+    }
+  
+
+  
+}
+manager();
+
+print();
+for (let i=0;i<200;i++)
+increase();
+print();
+decrease();
+
+print();
+set(134);
+print();
+
+let new_print = print;
+manager();
+print();
+new_print();
+```
+
+
+
+* Output:
+```javascript
+manager();
+15
+215
+214
+134
+manager();
+15
+134
+```
+## Explanation : ##
+
+* After calling manager() for the first time. The function executed and all global references were linked to their respective anonymous functions. 
+* This created our first closure. Now, let’s try to use the global methods to see what happens.
+* We then called some methods: increase(), decrease() and set() to modify the value of number variable defined inside manager function. 
+* At each step we printed out the value using the print() method, to confirm it actually changed
+
+
+## Example 4 ##
+
+```javascript
+let get = null;            //placeholder for global getter function
+
+function closure() {
+
+ this. inc = 0;
+  get = () =>  console.log(this.inc);   this.inc;   //getter
+
+  function increase(){
+     this.inc++; 
+     console.log(this.inc);
+  }
+  function decrease(){
+    this.inc--;
+    console.log(this.inc);
+  }
+  function set(v){
+    this.inc = v;
+    console.log(v);
+  }
+  function reset(){
+    this.inc=0;
+    console.log(this.inc);
+
+  }
+  function del(){
+    delete this.inc;       //becomes undefined
+    this.inc=null;          //additionally reset it to null
+    console.log(this.inc);
+    //console.log("this.inc deleted");
+  }
+  function readd(){
+    //if null or undefined
+    if(!this.inc)
+    this.inc="re-added";
+  }
+  //return all methods at once
+  return [increase , decrease, set ,reset , del, readd];
+}
+
+
+
+let f=closure();   //Initialize closure
+
+
+
+let inc= f[0];
+let dec =f[1];
+let set =f[2];
+let res =f[3];
+let del = f[4];
+let add = f[5];
+
+inc();
+inc();
+inc();
+dec();
+get();
+set(7);
+get();
+res();
+get();
+
+//Delete property
+
+del(0);
+get();
+
+//read property inc
+add();
+get();
+
+res();
+inc();
+get();
+
+
+```
+* Output:
+
+```javascript
+1
+2
+3
+2
+2
+7
+7
+0
+0
+null
+null
+re-added
+0
+1
+1
+```
+
+# Arity #
+
+* Arity is the number of arguments a function takes.
+* We can access function’s arity via Function.length property.
+
+```javascript
+function arity(a,b,c){   //function with 3 parameters
+
+  console.log(`Type your firstname,middlename,lastname: ${a} , ${b} , ${c} .`);
+
+}
+arity('S','Vijay','');
+
+let number_of_arguments = arity.length;  // function_name.length property returns the number of parameters in the function
+
+console.log(number_of_arguments);
+
+```
+
+* Output:
+
+```javascript
+Type your firstname,middlename,lastname: S , Vijay ,  .
+3
+```
+# Currying #
+
+* Currying is a pattern that immediately evaluates and returns another function expression.
+
+* A curried function can be constructed by chaining closures by defining and immediately returning all inner functions at the same time.
+
+## EX:1 ##
+
+```javascript
+//currying
+
+let planets = function(m){
+  return function(n) {
+    return "Favorite planets are " + m + " and " + n;
+  };
+};
+
+let favoriteplanets = planets("Jupiter");
+
+//Call the curried function with different arguments:
+
+console.log(favoriteplanets("Earth"));
+console.log(favoriteplanets("Mars"));
+console.log(favoriteplanets("saturn"));
+
+```
+
+* Output:
+
+```javascript
+Favorite planets are Jupiter and Earth
+Favorite planets are Jupiter and Mars
+Favorite planets are Jupiter and saturn
+
+```
+
+* The inner function can be invoked immediately after the first call
+```javascript
+// Call the curried function with two arguments:
+console.log(planets("Jupiter")("Mars"));
+```
+
+* Output:
+```javascript
+Favorite planets are Jupiter and Mars
+```
+
+#  Modern Currying (Using Arrow functions) #
+
+## EX ## 
+
+```javascript
+//Modern currying
+
+let modern = (a) => (b) => "Plants are " + a + " and " + b;
+console.log(planets("Venus")("Mars"));
+
+```
+* Output:
+
+```javascript
+Favorite planets are Venus and Mars
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
