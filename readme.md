@@ -2013,6 +2013,845 @@ console.log(planets("Venus")("Mars"));
 Favorite planets are Venus and Mars
 
 ```
+# Chapter : 11   #
+# Loops #
+
+* The primary purpose of a loop is to iterate over one or a set of multiple statements.
+
+## Iteration ##
+
+* Iteration  means to repeat an action a multiple number of times.
+
+* Array is iterable and Object is not iterable.
+
+## Types of loops in JavaScript ##
+
+* Common iterators are for, for...of, for...in, while and Array.forEach.
+*  Some Array methods are assumed to be iterators: .values, .keys, .map, .every, .some, .filter, .reduce and a few others.
+
+## Incrementing And Reducing ##
+
+```javascript
+
+//incrementing and decreament
+
+let miles = [5,12,75,2,5];
+
+//Add up all nubers using a for-loop
+
+let A=0;
+for(let i=0;i<5;i++)
+{
+    A+=miles[i];
+   
+
+} console.log(A);
+```
+
+* Output:
+
+```javascript
+guest@stalin:~/Documents/javascript$ node loops.js
+99
+```
+
+```javascript
+//Add up all numbers using reducer:Array.reduce method
+
+const R = (accumulator , value ) => accumulator + value;
+const result = miles.reduce(R);
+console.log(result);
+```
+* Output:
+
+```javascript
+guest@stalin:~/Documents/javascript$ node loops.js
+99
+```
+
+## Generating HTML Elements Dynamically  ##
+
+```javascript
+//Add 10 elements to the page
+for(let i=0;i<10;i++){
+    //creating a new html element
+    let element = document.createElement("div");
+
+    //insert inner html into the element 
+    element.innerHTML = "element"+i;
+    console.log(element);
+   
+
+
+    //add the created element to the document
+    //document.appendChild(element);
+
+
+}
+```
+* Output:
+
+<img src="images/loops ex.png" alt="Sorry" height="150">
+
+# for loops #
+
+## Synatx ##
+
+<img src="images/forloop syntax.png" alt="Sorry" height="140" width="">
+
+```javascript
+for(let j=0;j<5;j++){
+    console.log("hi");
+}
+```
+* Output:
+```javascript
+hi
+hi
+hi
+hi
+hi
+```
+```javascript
+//Multiple satements
+
+for (let i=0;i<4;i++){
+    let sum=i+1;
+   console.log(sum);
+}
+```
+* Output:
+```javascript
+1
+2
+3
+4
+```
+# The Infinite for Loop #
+```javascript
+//infinite forloop synatx:
+
+for(; ;)
+{console.log("vj");}
+```
+
+* A for loop can be defined without any of the default statements. But by doing this you will create an infinite for-loop that will freeze your program:
+* A while loop should probably be used in this case.
+
+# Multiple Statements #
+
+* Multiple statements can be separated by comma.
+*  NOTE: we should definitely avoid using global variables in these types of cases.
+
+```javascript
+let counter=0;
+
+function inc(){
+    counter++;
+}
+
+for (let i=0;i<10;i++,inc());  //body-less  for loop
+                               //We called the function 10 times using for-loop
+
+console.log(counter);
+```
+* Output:
+```javascript
+10
+```
+# for loops and let scope. #
+
+* A let variable cannot be defined without scope brackets. 
+
+* All variables defined using let keyword require their own local scope.
+
+## Wrong method ##
+```javascript
+for(var i=0;i<5;i++) let x=i;
+```
+* output:
+```javascript
+/home/guest/Documents/javascript/loops.js:67
+for(var i=0;i<5;i++) let x=i;
+                     ^^^
+
+SyntaxError: Lexical declaration cannot appear in a single-statement context
+```
+## Correct method ##
+
+```javascript
+for(var i=0;i<5;i++){ let x=i; console.log(x);}
+
+```
+* Output:
+
+```javascript
+0
+1
+2
+3
+4
+```
+# Nested for Loops #
+
+* it can be used as the iterable statement of another for loop
+* In simple words a for-loop inside another for-loop
+* It is mostly used for twe dimensional array / grid.
+
+```javascript
+for(let i=0;i<2;i++){
+    for(let j=0;j<2;j++){
+    
+        console.log(i,j);
+    }
+
+}
+```
+
+* Output:
+
+```javascript
+0 0
+0 1
+1 0
+1 1
+```
+# Skipping Steps #
+
+## continue keyword ##
+* The continue keyword tells code flow to go to the next step without executing any next statements in this for-loop’s scope during the current iteration step.    
+
+### Ex:1 ###
+
+```javascript
+//continue keyword
+
+for(let i=0;i<4;i++){
+    if(i==1)
+    continue;
+    console.log(i);
+}
+```
+
+* Output:
+
+```javascript
+0
+2
+3
+```
+
+## break keyword ##
+
+* We can break out of a for loop by using break keyword.
+
+## EX:1 ##
+
+```javascript
+for(let i=0;i<3;i++){
+    
+    console.log(i);
+    break;
+}
+```
+* Output:
+
+```javascript
+ 0            // Here the whole loop is skipped after the break keyword.
+```
+
+## Custom Breaking Condition ##
+* It’s perfectly legal to move the conditional test into the for loop’s body, instead of testing for it between the parenthesis.
+
+## EX: ##
+```javascript
+for (let i=0; ;i++)    //Here we don't have conditional statement
+{
+console.log("hi i am conditional loop..." + i );
+if(i>5)                //We set condtion inside the body of for..loop using break statement.
+break;
+}
+```
+* Output:
+
+```javascript
+hi i am conditional loop...0
+hi i am conditional loop...1
+hi i am conditional loop...2
+hi i am conditional loop...3
+hi i am conditional loop...4
+hi i am conditional loop...5
+```
+## Breaking To Label ##
+
+* In JavaScript, a statement can be labeled when a label name: is prepended to a statement.
+*  Because a for loop is a statement you can label for loops.
+
+## EX:1  ##
+```javascript
+let c=0;
+mark : for( let i=0;i<5;i++){
+    inner : for (let j=0;j<5;j++){
+        c++;
+        if(i==2)
+        break mark;    //breaking primary loop
+    }
+}
+console.log(c);
+```
+* Output:
+
+```javascript
+11
+```
+
+## EX:2 ##
+
+```javascript
+let c=0;
+mark : for( let i=0;i<5;i++){
+    inner : for (let j=0;j<5;j++){
+        c++;
+        if(i==2)
+        break inner;           //breaking inner loop
+    }
+}
+console.log(c);
+```
+
+* Output:
+
+```javascript
+21
+```
+## Breaking from a labeled block scope ##
+
+* We can use break keyword to break out of regular non for-loop block scope as long as it’s labeled
+
+### EX: ###
+
+```javascript
+vijay :{
+    console.log("Hi i am before breaking block");
+    break vijay;                               
+    console.log("Hi i am after breaking block");  // Execution flow will not reach this statement.
+}
+```
+
+* Output:
+
+```javascript
+Hi i am before breaking block
+```
+# for...of Loop #
+
+## Generators in javascipt ##
+
+* A generator – a special type of function with star * character appended to the function* keyword.
+
+* When a generator function is called, the multiple yield statements inside it do not execute at the same time, as you would normally expect.
+
+## Example generator function with explanation ##
+```javascript
+//generators function show():
+
+function* show(){    //generator function declaration using *
+    
+    yield '1';       //yield is the special keyword in generator function to display something.
+ 
+}
+let d = show();      //rename the function with new name
+
+console.log(d.next().value);          //This is the one way generator function call() using 
+                                       //function_name.next().value
+```
+
+* Output:
+
+```javascript
+1
+```
+## Reason to use generator function ##
+
+* Generator functions allow you to declare a function that behaves like an iterator. 
+
+* They allow programmers to make an iterator in a fast, easy, and clean way.
+
+* which means we can call only if the iteration is needed by calling it.
+
+## Important in generator functions ##
+
+* In generator functions , we cannot except all the lines to execute. It will only executr the code till first yield statement.If we want to execute the next we have to call the function back.
+
+```javascript
+function * dis(){
+    yield 1;
+    yield 'hi';
+}
+let gen = dis();
+console.log(gen.next().value);   //This will only display 1
+console.log(gen.next().value);   //This will display 'hi'
+```
+
+* Output:
+
+```javascript
+1
+hi
+```
+
+## for...of and Generators ##
+
+* Generator executes a yield statement asynchronously, even though the code inside the generator function has linear appearance. 
+
+* This is done on purpose - it makes code more readable compared to alternatives (XMLHttpRequest, Ajax, etc).
+
+## EX: generator function call with for..of loop ## 
+
+```javascript
+
+function * dis(){
+    yield 1;
+    yield 'hi';
+}
+
+for (let gun of dis()){
+    console.log(gun);       //Just executes all the statements inside function
+}
+```
+
+* Output:
+
+```javascript
+1
+hi
+```
+## for...of and Strings ##
+
+* We can walk each character of a string using a for...of loop as String is iterable.
+
+## Ex: To display each characters in string using for ...of ##
+
+```javascript
+let string=" hi i am 12!";
+ for(let char of string){
+     console.log(char);
+ }
+```
+* output:
+
+```javascript
+h
+i
+ 
+i
+ 
+a
+m
+ 
+1
+2
+!
+```
+
+## for...of and Arrays ##
+
+* We can iterate through it without having to create index variables.
+
+* Once the end of the array is reached the loop will end automatically.
+
+## EX: Array iteration using for...of ##
+
+```javascript
+let array=[1,46,45,27];
+for(let a of array){
+    console.log(a);
+}
+```
+
+* Output:
+
+```javascript
+1
+46
+45
+27
+```
+
+## for...of and Objects ##
+* for...of loops work only with iterable values.
+*  An object is not an iterable. (It has enumerable properties.)
+
+## EX: object iteratio using for..of (It WILL not work) ##
+
+```javascript
+let obj = {
+    name: "Vijay",
+    age:20,
+    initial:'S'
+}
+
+for(let ob of obj) {
+    console.log(ob);
+}
+```
+* output:
+
+```javascript
+/home/guest/Documents/javascript/loops.js:196
+for(let ob of obj) {
+              ^
+
+TypeError: obj is not iterable
+```
+## for...of loops and objects converted to iterables ##
+
+* first convert an object to an iterable using some of the built-in Object methods: .keys, .values or .entries
+
+```javascript
+console.log("----consider ----");
+let enumerable = {
+    property : 1,
+    method : () => {
+        console.log("Hi ");
+    }
+};
+
+for (let key of Object.keys(enumerable))
+console.log(key);
+
+for(let value of Object.values(enumerable))
+console.log(value);
+
+for(let entry of Object.entries(enumerable))
+console.log(entry);
+
+```
+* output:
+```javascript
+property
+method
+1
+[Function: method]
+[ 'property', 1 ]
+[ 'method', [Function: method] ]
+```
+## for...in Loops ##
+* for...in loops work with enumerable object properties. 
+* It’s a much more elegant solution for iterating through Object properties.
+```javascript
+let book={
+    name:"Aadu",
+    Language:"Tamil",
+    read : () =>{
+        console.log("I have read it");
+    }
+}
+for(let b in book){
+    console.log(b,book[b]);
+}
+```
+* Output:
+
+```javascript
+name Aadu
+Language Tamil
+read () =>{
+        console.log("I have read it");
+    }
+```
+### NOTE: ###
+* We won’t see constructor and prototype properties in an output from the for...in loop.
+*  Although they exist on an object they are not considered to be enumerable.
+
+# While Loops #
+
+* A while loop will iterate for an indefinite number of times until the specified condition (there is only one) evaluates to false.
+
+<img src="images/while syntax.png" width="600">
+
+## EX: ##
+```javascript
+//while loop 
+
+let count=0;
+while(count<4){
+    count=count+1;
+
+console.log(count);
+}
+```
+* Output:
+
+```javascript
+1
+2
+3
+4
+```
+* A secondary condition can be tested within the loop. This makes it possible to break from the loop earlier if needed 
+
+```javascript
+//while loop 
+
+let count=0;
+while(count<4){
+    if(count==2)   //Inner condition
+    break;
+    count=count+1;
+
+console.log(count);
+}
+```
+* Output:
+
+```javascript
+1
+2
+```
+
+## While and continue ##
+
+```javascript
+while(count++ < 1000){
+    if(count>2)   //Inner condition
+    continue;        //It omits the current iteration
+    console.log(count);
+}
+```
+* output:
+
+```javascript
+1
+2
+```
+## Note:if statement is still executed 1000 times,If you need an early exist, use break instead. ##
+
+# Chapter 12 #
+
+# Arrays #
+
+# Array.prototype.sort() #
+
+* The sort() method sorts the elements of an array in place and returns the sorted array. 
+
+* The default sort order is ascending, built upon converting the elements into strings, then comparing their sequences of UTF-16 code units values.
+
+* The in-built sort method contains the comparefunction default.It compares the parameters a and b and set the positons .Here,
+  * a points to first element of the object array.
+  * b points to second element  of the object array.
+
+* EX:
+
+```javascript
+
+function compare(a, b) {
+  if (a is less than b by some ordering criterion) {
+    return -1;
+  }
+  if (a is greater than b by the ordering criterion) {
+    return 1;
+  }
+  // a must be equal to b
+  return 0;
+}
+```
+* Example program to sort an array with objects using it's count property:
+
+```javascript
+let fruit = [
+    {name:"Apple",count:23,},
+    {name:"Orange",count:20,},
+    {name:"PineApple",count:1,},
+    {name:"Watermelon",count:10,},
+    {name:"Pomogranate",count:50,},
+    {name:"Banana",count:50,},
+
+];
+console.log("Array before sorting:/n");
+console.log(fruit);
+
+console.log("Array after sorting:/n");
+
+fruit.sort(function(a,b){
+    if(a.count < b.count)
+    return -1;
+    if(a.count > b.count)
+    return 1;
+    return 0;
+
+});
+console.log(fruit);
+```
+* Output:
+
+```javascript
+guest@stalin:~/Documents/javascript$ node array.js
+Array before sorting:/n
+[ { name: 'Apple', count: 23 },
+  { name: 'Orange', count: 20 },
+  { name: 'PineApple', count: 1 },
+  { name: 'Watermelon', count: 10 },
+  { name: 'Pomogranate', count: 50 },
+  { name: 'Banana', count: 50 } ]
+Array after sorting:/n
+[ { name: 'Pomogranate', count: 50 },
+  { name: 'Banana', count: 50 },
+  { name: 'Apple', count: 23 },
+  { name: 'Orange', count: 20 },
+  { name: 'Watermelon', count: 10 },
+  { name: 'PineApple', count: 1 } ]
+
+
+```
+
+
+
+
+
+
+
+
+
+* A stable sorting algorithm is when two objects with equal keys appear in the same order in the sorted output as they appear in the unsorted input.
+
+* Below is the stable sorting algorithm:
+
+```javascript
+let fruit = [
+    {name:"Apple",count:23,},
+    {name:"Orange",count:20,},
+    {name:"PineApple",count:1,},
+    {name:"Watermelon",count:10,},
+    {name:"Pomogranate",count:50,},
+    {name:"Banana",count:50,},
+
+];
+console.log("Array before sorting:/n");
+console.log(fruit);
+
+console.log("Array after sorting:/n");
+
+let my_sort = (a,b) => a.count - b.count;
+
+let sorted = fruit.sort(my_sort);
+console.log(sorted);
+
+```
+
+* Output:
+
+```javascript
+guest@stalin:~/Documents/javascript$ node array.js
+Array before sorting:/n
+[ { name: 'Apple', count: 23 },
+  { name: 'Orange', count: 20 },
+  { name: 'PineApple', count: 1 },
+  { name: 'Watermelon', count: 10 },
+  { name: 'Pomogranate', count: 50 },
+  { name: 'Banana', count: 50 } ]
+Array after sorting:/n
+[ { name: 'PineApple', count: 1 },
+  { name: 'Watermelon', count: 10 },
+  { name: 'Orange', count: 20 },
+  { name: 'Apple', count: 23 },
+  { name: 'Pomogranate', count: 50 },
+  { name: 'Banana', count: 50 } ]
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
