@@ -226,8 +226,6 @@ while(count++ < 1000){
     if(count>2)   //Inner condition
     continue;        //It omits the current iteration
     console.log(count);
-}
-
 
 
 

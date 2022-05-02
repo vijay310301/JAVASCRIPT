@@ -2704,15 +2704,6 @@ Array after sorting:/n
 
 
 ```
-
-
-
-
-
-
-
-
-
 * A stable sorting algorithm is when two objects with equal keys appear in the same order in the sorted output as they appear in the unsorted input.
 
 * Below is the stable sorting algorithm:
@@ -2759,9 +2750,50 @@ Array after sorting:/n
   { name: 'Banana', count: 50 } ]
 
 ```
+# Array.forEach #
 
+* The forEach method will execute a function for every item in the array.
 
+* Each iteration step receives 3 arguments value, index, object.
 
+## Ex : 1 ##
+
+```javascript
+//for ..each method
+
+let animals = ['dog','cat','lion','snake'];
+
+let show = (item,index,object) => {
+    console.log(item,index,object);
+}
+
+animals.forEach(show);
+```
+* Output:
+
+```javascript
+dog 0 [ 'dog', 'cat', 'lion', 'snake' ]
+cat 1 [ 'dog', 'cat', 'lion', 'snake' ]
+lion 2 [ 'dog', 'cat', 'lion', 'snake' ]
+snake 3 [ 'dog', 'cat', 'lion', 'snake' ]
+```
+## EX : 2 ##
+
+```javascript
+let numbers = [1,4,6];
+let add5 = (item,index) => {
+    item+=5;
+    console.log(item,index);
+}
+numbers.forEach(add5);
+```
+* Output:
+
+```javascript
+6 0
+9 1
+11 2
+```
 
 
 

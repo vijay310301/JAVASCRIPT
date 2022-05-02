@@ -29,3 +29,49 @@ console.log(fruit);
 let sorted = fruit.sort(my_sort);
 console.log(sorted);
 */
+
+//for ..each method
+
+let animals = ['dog','cat','lion','snake'];
+
+let show = (item,index,object) => {
+    console.log(item,index,object);
+}
+
+animals.forEach(show);
+
+
+
+let numbers = [1,4,6];
+let add5 = (item,index) => {
+    item+=5;
+    console.log(item,index);
+}
+numbers.forEach(add5);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
