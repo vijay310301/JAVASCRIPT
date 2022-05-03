@@ -2794,6 +2794,331 @@ numbers.forEach(add5);
 9 1
 11 2
 ```
+# Array.every #
+
+## Return value: boolean ##
+
+* The method every will return true if the value of every single item in the array satisfies the condition specified in its function argument.
+
+* Otherwise it will return false.
+
+## EX:1 {true} ##
+
+```javascript
+//array.every
+
+let array = [2,4,6,8,10,12];
+
+let res = array.every(odd);
+
+function odd(item) {
+    return item%2==0;   //Checking wheather all numbers are even
+}
+
+console.log(res);       //True
+
+
+```
+
+* Output:
+
+```javascript
+true
+```
+## EX:2 {false} ##
+
+* If any one of the array element is not satisfies the condition , it will return false and will not move to next element in the array.
+
+```javascript
+let birds=['crow','crow','crow','hen'];
+
+let fly = (item) => {
+    return item==='crow'           //Check wheather every element in arry is 'crow'
+}
+
+let result = birds.every(fly);
+
+console.log(result); //It will return false as the last element is not 'crow'
+```
+* Output:
+
+```javascript
+false
+```
+
+# Array.some #
+
+## Return value: boolean ##
+
+* Similar to Array.every except it stops looping whenever it encounters a value that evaluates to true (and not false like in Array.every)
+
+
+## EX:1 {true} ##
+
+```javascript
+//array.some
+
+let arr = [1,3,5,7,9,12];
+
+let r = arr.some(even);
+
+function even(item) {
+    return item%2==0;   //Checking wheather any of the number is even
+}
+
+console.log(r);       //true because 12 is even in the array
+```
+
+* Output:
+
+```javascript
+true
+```
+## EX:1 {false} ##
+
+* It will only return false whwn allthe array elements fails to satisfy the condition.
+
+```javascript
+
+let alpha= ['z,','w','r','j','q'];
+
+let f = alpha.some(isVowel);
+
+function isVowel(item){
+    return (item== 'a') || (item== 'e') || (item== 'i') || (item== 'o') || (item== 'u')  //Checking whether a single element in array is vowel or not
+}
+console.log(f);  //It will eturn false as no one in array is not vowel
+```
+* Output:
+
+```javascript
+false
+```
+# Array.filter #
+
+## Return value: new array consisting only of items that passed a condition ##
+
+* According to the condition passed the array elements is gathered as anew array.
+
+* This method will not affect the original array.
+
+## EX: ## 
+
+```javascript
+//array.filter
+
+let num=[0,1,10,12,37,67,32];  //Original array
+
+let oddn=num.filter(fun);
+
+function fun(item){
+    return item%2!=0;          //To gather all odd numbers
+}
+
+let evenn = num.filter(sun);
+
+function sun(item){
+    return item%2==0;           //To gather all even numbers
+}
+
+console.log(oddn);            //It prints new  oddnumber array
+
+console.log(evenn);           //It prints new  even number array
+
+console.log(num);              // it prints unchanged original array
+```
+* Output:
+
+```javascript
+[ 1, 37, 67 ]
+[ 0, 10, 12, 32 ]
+[ 0, 1, 10, 12, 37, 67, 32 ]
+```
+# Array.map #
+
+## Return value: a copy of the original array with modified values (if any.) ##
+
+* Array.map method is used to produce a new array where the each element has been changed according to the condition defined without chanhing the origina array.
+
+* Array.map is like Array.forEach but it returns a copy of the modified array.
+
+## EX: ##
+
+```javascript
+//array.map
+
+let elements=[100,200,300,400,500];
+
+let divide = (item) => {  return item/10 };   // Divide 10 for each element
+
+let final = elements.map(divide);            // Using Array.map
+
+console.log(final);                           //Array after map
+
+console.log(elements);                       //Original array (Unchanged)
+
+
+let multiply = (item) => { console.log(  item * 2 ) };   // multiply each value with 2
+
+ elements.forEach(multiply);                             //Using forEach (Original array is changed)
+```
+* Output:
+
+```javascript
+[ 10, 20, 30, 40, 50 ]
+[ 100, 200, 300, 400, 500 ]
+200
+400
+600
+800
+1000
+```
+
+# Array.reduce #
+
+## Return value: accumulator ##
+
+*  The arr. reduce() method in JavaScript is used to reduce the array to a single value and executes a provided function for each value of the array (from left-to-right) and the return value of the function is stored in an accumulator
+
+* The reduce() method does not execute the function for empty array elements. 
+
+* The reduce() method does not change the original array.
+
+```javascript
+
+//array.reduce
+
+let integers=[1,4,36,289,354];
+
+let print = integers.reduce( (accumulator,currentValue) => { return accumulator+ currentValue;  } );
+// here acc=1 ,curr=4 => acc=5
+//      acc=5 ,curr=36 => acc=41
+//      acc=41 ,curr=289 => acc=330
+//      acc=330 ,curr=354 => acc=684
+console.log(print);
+```
+* Output:
+
+```javascript
+684
+```
+## Practical Reducer Ideas ##
+
+* Narrowing down on object properties
+* Counting weekends
+* Function Purity
+
+## Dos and Dont’s ##
+
+* Do use it for summing up some numbers.
+* Do use it for multiplying some numbers.
+* Do use it for updating state in React.
+* Do not use it for building new lists or objects from scratch.
+* Do not use it for just about anything else (use a loop).
+* Do not use it to mutate (change original values of) its arguments.
+* Do not use it perform side effects, like API calls and routing transitions.
+* Do not use it to call non-pure functions, e.g. Date.now() or Math.random().
+
+# Array.flat() #
+
+* The flat() method creates a new array with all sub-array elements concatenated into it recursively up to the specified depth.
+
+* Syntax:  flat()  or flat(depth)
+
+* The depth level specifying how deep a nested array structure should be flattened. Defaults to 1.
+
+
+
+## EX:##
+
+```javascript
+//array.flat
+let multi=[1,2,3,[4,5,6,[7,8,9,10,1037]]];
+
+console.log(multi.flat());
+
+```
+
+* Output:
+
+```javascript
+[ 1, 2, 3, 4, 5, 6, [ 7, 8, 9, 10, 1037 ] ]
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
