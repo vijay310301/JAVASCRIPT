@@ -3027,9 +3027,13 @@ console.log(print);
 
 * The depth level specifying how deep a nested array structure should be flattened. Defaults to 1.
 
+* NOTE: It is ES10.SO there is a chance of not working in current version .Use nvm to get the results properly.
 
+* Click the below link to knoe about nvm installation in ubunto terminal.
 
-## EX:##
+* <a href="https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04"> Click me for nvm installation  </a>
+
+## EX: ##
 
 ```javascript
 //array.flat
